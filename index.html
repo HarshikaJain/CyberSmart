@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CyberSmart: Your Cyber Hygiene Toolkit</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <header>
+        <h1>🛡️ CyberSmart</h1>
+        <p>Your Personal Cyber Hygiene Toolkit</p>
+      <nav>
+       <a href="password.html">Password Checker</a>
+       <a href="phishing.html">Phishing Tips</a>
+       <a href="quiz.html">Quizzes</a>
+       <a href="contact.html">About Me</a>
+
+      </nav>
+
+      <div style="text-align: right; margin: 10px 20px;">
+        <input type="checkbox" id="modeToggle" onchange="toggleMode()" hidden />
+        <label for="modeToggle" id="modeLabel" style="cursor: pointer; font-size: 24px;">🌞</label>
+      </div>      
+        
+    </header>
+
+    <main>
+        <section>
+          <h2>Why Cyber Hygiene Matters 🧠</h2>
+          <p>
+            Every day, people get tricked by scams, weak passwords, and unsafe websites.
+            CyberSmart helps you stay protected with smart tools and simple tips.
+          </p>
+        </section>
+
+        <section>
+            <h2>🔧 Toolkit Highlights</h2>
+            <ul>
+              <li>✔️ Password Strength Checker</li>
+              <li>✔️ Phishing Awareness Tips</li>
+              <li>✔️ Real-Life Cybercrime Examples</li>
+              <li>✔️ Easy, Useful, and Free!</li>
+            </ul>
+        </section>
+    </main>
+
+        <footer>
+            <p>Made with 💻 by Harshika Jain | B.Tech Student | Parul University</p>
+        </footer>
+        
+<script>
+  function toggleMode() {
+    const isDark = document.getElementById("modeToggle").checked;
+
+    document.body.classList.toggle("dark", isDark);
+    document.querySelector("header").classList.toggle("dark", isDark);
+    document.querySelectorAll("section").forEach(el => el.classList.toggle("dark", isDark));
+    document.querySelector("footer").classList.toggle("dark", isDark);
+    document.querySelectorAll("nav a").forEach(link => link.classList.toggle("dark", isDark));
+
+    const label = document.getElementById("modeLabel");
+    label.textContent = isDark ? "🌙" : "🌞";
+  }
+</script>
+
+</body>
+</html>

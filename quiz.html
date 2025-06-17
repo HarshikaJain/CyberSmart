@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyber Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e3f2fd;
+    }
+
+    header {
+      background: #2196f3;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .quiz-container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #f3f3f3;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #aaa;
+    }
+
+    .question {
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+
+    .wrong {
+      color: red;
+      font-weight: bold;
+    }
+
+    #quiz-box {
+      display: none;
+    }
+
+    #options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    #options button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+    }
+
+    #progress-container {
+      background: #ccc;
+      height: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #00c853;
+      transition: width 0.5s ease-in-out;
+    }
+
+    #percentage {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🧠 Cybersecurity Quiz</h1>
+  <p>Test your cyber knowledge!</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="password.html">Password Checker</a>
+    <a href="phishing.html">Phishing Tips</a>
+    <a href="contact.html">About Me</a>
+  </nav>
+</header>
+
+<main class="quiz-container">
+  <div id="level-select">
+    <h2>Select Level</h2>
+    <button onclick="startQuiz('beginner')">Beginner</button>
+    <button onclick="startQuiz('intermediate')">Intermediate</button>
+    <button onclick="startQuiz('expert')">Expert</button>
+  </div>
+
+  <div id="quiz-box">
+    <div id="percentage">Progress: 0%</div>
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+
+    <h2 id="question">Question appears here</h2>
+
+    <div id="options">
+      <button id="opt0" onclick="checkAnswer(0)"></button>
+      <button id="opt1" onclick="checkAnswer(1)"></button>
+      <button id="opt2" onclick="checkAnswer(2)"></button>
+      <button id="opt3" onclick="checkAnswer(3)"></button>
+    </div>
+
+    <p id="feedback"></p>
+    <p id="score">Score: 0</p>
+    <button id="next" onclick="nextQuestion()">Next</button>
+  </div>
+</main>
+
+<footer>
+  <p>Created with 🧠 by Harshika Jain</p>
+</footer>
+
+<script>
+    let questions = [];
+    let currentQ = 0;
+    let score = 0;
+    let timerInterval;
+    let timeLeft = 15;
+  
+    function startQuiz(level) {
+      questions = quizLevels[level];
+      document.getElementById("level-select").style.display = "none";
+      document.getElementById("quiz-box").style.display = "block";
+      currentQ = 0;
+      score = 0;
+      loadQuestion();
+    }
+  
+    function loadQuestion() {
+      const q = questions[currentQ];
+      const questionText = q.q || q.question;
+  
+      document.getElementById("question").textContent = questionText;
+  
+      q.options.forEach((opt, i) => {
+        const btn = document.getElementById("opt" + i);
+        btn.textContent = opt;
+        btn.disabled = false;
+        btn.className = "";
+        btn.style.backgroundColor = ""; // Reset background
+      });
+  
+      // Hide unused option buttons if less than 4 options
+      for (let i = q.options.length; i < 4; i++) {
+        document.getElementById("opt" + i).style.display = "none";
+      }
+  
+      document.getElementById("feedback").textContent = "";
+    }
+  
+    function checkAnswer(selected) {
+      clearInterval(timerInterval);
+      const correct = questions[currentQ].answer;
+      const feedback = document.getElementById("feedback");
+  
+      const buttons = document.querySelectorAll("#options button");
+      buttons.forEach((btn, index) => {
+        btn.disabled = true;
+        if (index === correct) {
+          btn.style.backgroundColor = "#c8e6c9"; // green for correct
+        } else if (index === selected) {
+          btn.style.backgroundColor = "#ffcdd2"; // red for wrong
+        }
+      });
+  
+      if (selected === correct) {
+        feedback.textContent = "✅ Correct!";
+        feedback.className = "correct";
+        score++;
+      } else if (selected === null) {
+        feedback.textContent = "⏰ Time's up!";
+        feedback.className = "wrong";
+      } else {
+        feedback.textContent = "❌ Wrong!";
+        feedback.className = "wrong";
+      }
+  
+      // ✅ Update progress here (after answering)
+      const progress = ((currentQ + 1) / questions.length) * 100;
+      document.getElementById("progress-bar").style.width = `${progress}%`;
+      document.getElementById("percentage").textContent = `Progress: ${Math.round(progress)}%`;
+  
+      document.getElementById("score").textContent = `Score: ${score}/${questions.length}`;
+    }
+  
+    function nextQuestion() {
+      currentQ++;
+  
+      if (currentQ < questions.length) {
+        loadQuestion();
+      } else {
+        document.getElementById("progress-bar").style.width = `100%`;
+        document.getElementById("percentage").textContent = `Progress: 100%`;
+  
+        document.getElementById("question").textContent = "🎉 Quiz Completed!";
+        document.getElementById("options").style.display = "none";
+        document.getElementById("feedback").textContent = `You scored ${score} out of ${questions.length}`;
+        document.getElementById("next").style.display = "none";
+        clearInterval(timerInterval);
+      }
+    }
+  
+    const quizLevels = {
+      beginner: [
+        {
+          question: "What should you never share online?",
+          options: ["Your favorite color", "Your password", "A meme"],
+          answer: 1
+        },
+        {
+          question: "What does phishing mean?",
+          options: ["Catching fish", "Cyber attack", "Online game", "Web surfing"],
+          answer: 1
+        },
+        {
+          question: "A secure website starts with:",
+          options: ["http://", "www", "https://"],
+          answer: 2
+        }
+      ],
+      intermediate: [
+        {
+          question: "Which is a sign of a phishing email?",
+          options: ["Urgent action needed", "Greeting by your name", "No links included"],
+          answer: 0
+        },
+        {
+          question: "What is 2FA?",
+          options: ["Two Finger Authentication", "Two-Factor Authentication", "Fast Login App"],
+          answer: 1
+        },
+        {
+          question: "Which is a sign of phishing?",
+          options: ["Secure website", "Misspelled email", "HTTPS site", "Strong password"],
+          answer: 1
+        }
+      ],
+      expert: [
+        {
+          question: "Which password is strongest?",
+          options: ["Pass123", "P@ssW0rd", "5#rT!p@9sL"],
+          answer: 2
+        },
+        {
+          question: "How often should you update passwords?",
+          options: ["Every 5 years", "Never", "Regularly"],
+          answer: 2
+        }
+      ]
+    };
+  </script>  
+
+</body>
+</html>

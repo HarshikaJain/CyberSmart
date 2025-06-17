@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phishing Awareness</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🎣 Phishing Awareness</h1>
+    <p>Don’t get hooked! Learn to recognize online traps.</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="password.html">Password Checker</a>
+      <a href="quiz.html">Quizzes</a>
+      <a href="contact.html">About Me</a>
+    </nav>
+
+    <div id="mode-switch" style="text-align: right; margin: 10px 20px;">
+      <label style="cursor: pointer;">
+        <input type="checkbox" id="modeToggle" onchange="toggleMode()" style="display: none;" />
+        <span id="modeIcon" style="font-size: 24px;">🌞</span>
+      </label>
+    </div>      
+  </header>
+
+  <main>
+    <section>
+      <h2>🚨 What is Phishing?</h2>
+      <p>
+        Phishing is a cybercrime where attackers trick you into giving up personal information like passwords, bank details, or OTPs by pretending to be a trusted source (like your bank or a government agency).
+      </p>
+    </section>
+
+    <section>
+      <h2>📧 How to Identify Phishing Attacks</h2>
+      <ul>
+        <li>⚠️ Unfamiliar or misspelled email addresses</li>
+        <li>🔗 Suspicious or shortened links</li>
+        <li>📢 Urgent language like “Act Now” or “Your account will be closed”</li>
+        <li>📎 Unusual attachments or pop-ups asking for credentials</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>✅ Stay Safe with These Tips</h2>
+      <ul>
+        <li>🔒 Never share OTPs or passwords online</li>
+        <li>🔍 Always verify the sender’s email or number</li>
+        <li>💻 Use updated antivirus & browser</li>
+        <li>🧠 Think before you click!</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📽️ Real Case Coming Soon!</h2>
+      <p>You can later embed your short reel or video explaining a real scam incident here.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Created with 🧠 by Harshika Jain</p>
+  </footer>
+
+  <script>
+    function toggleMode() {
+      const isDark = document.getElementById("modeToggle").checked;
+  
+      document.body.classList.toggle("dark", isDark);
+      document.querySelector("header").classList.toggle("dark", isDark);
+      document.querySelectorAll("section").forEach(el => el.classList.toggle("dark", isDark));
+      document.querySelector("footer").classList.toggle("dark", isDark);
+      document.querySelectorAll("nav a").forEach(link => link.classList.toggle("dark", isDark));
+  
+      const label = document.getElementById("modeLabel");
+      label.textContent = isDark ? "🌙" : "🌞";
+    }
+  </script>
+  
+</body>
+</html>

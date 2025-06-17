@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me - Harshika Jain</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>👩‍💻 About Me</h1>
+    <p>Learn more about the creator of CyberSmart</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="password.html">Password Checker</a>
+      <a href="phishing.html">Phishing Tips</a>
+      <a href="quiz.html">Quizzes</a>
+    </nav>
+    
+    <div id="mode-switch" style="text-align: right; margin: 10px 20px;">
+      <label style="cursor: pointer;">
+        <input type="checkbox" id="modeToggle" onchange="toggleMode()" style="display: none;" />
+        <span id="modeIcon" style="font-size: 24px;">🌞</span>
+      </label>
+    </div>    
+  </header>
+
+  <main>
+    <section class="intro-container">
+    <div class="intro-text">   
+      <h2>🙋‍♀️ Hi, I'm 
+        <span style="color: teal;">Harshika Jain</span>
+    </h2>
+        <p>
+            I’m a 1st-year <strong>B.Tech student at Parul University</strong>, driven by a passion for <strong>cybersecurity, ethical hacking, and creative tech</strong>. <br><br>
+            I love exploring how the digital world works and building tools that make the internet safer for everyone. <br>
+            This is my first complete project, <em>built 100% from scratch</em>, and I’m excited to keep learning and growing!
+        </p>
+    </div>
+
+    <div class="intro-image">
+    <img src="H.png" alt="Harshika Jain" style="width: 200px; border-radius: 10px;" />
+    </div>
+    </section>
+
+    <section>
+      <h2>🛠️ My Skills</h2>
+      <ul>
+        <li>✔️ HTML, CSS, JavaScript (Beginner)</li>
+        <li>✔️ Cybersecurity Basics (Fundamental II)</li>
+        <li>✔️ Creative Editing (InShot)</li>
+        <li>✔️ Python (Learning Phase)</li>
+        <li>✔️ Certificates from Null Vadodara, WhiteHat Jr, Be10x, IT Specialist (HTML, CSS & JAVASCRIPT)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📫 Contact Me</h2>
+      <ul>
+        <li>Email: harshikaja27@gmail.com</li>
+        <li>GitHub: <a href="https://github.com/HarshikaJain" target="_blank">My GitHub</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/harshika-jain-4a4150319/" target="_blank">My LinkedIn</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>💡 Project CyberSmart by Harshika Jain | Parul University | 2025</p>
+  </footer>
+
+<script>
+  function toggleMode() {
+    const isDark = document.getElementById("modeToggle").checked;
+
+    document.body.classList.toggle("dark", isDark);
+    document.querySelector("header").classList.toggle("dark", isDark);
+    document.querySelectorAll("section").forEach(el => el.classList.toggle("dark", isDark));
+    document.querySelector("footer").classList.toggle("dark", isDark);
+    document.querySelectorAll("nav a").forEach(link => link.classList.toggle("dark", isDark));
+
+    const label = document.getElementById("modeLabel");
+    label.textContent = isDark ? "🌙" : "🌞";
+  }
+</script>
+
+</body>
+</html>
