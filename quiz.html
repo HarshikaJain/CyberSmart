@@ -176,10 +176,9 @@
         btn.textContent = opt;
         btn.disabled = false;
         btn.className = "";
-        btn.style.backgroundColor = ""; // Reset background
+        btn.style.backgroundColor = ""; 
       });
-  
-      // Hide unused option buttons if less than 4 options
+
       for (let i = q.options.length; i < 4; i++) {
         document.getElementById("opt" + i).style.display = "none";
       }
@@ -222,31 +221,37 @@
     }
   
     function nextQuestion() {
-      const retryBtn = document.createElement("button");
-retryBtn.textContent = "Choose Another Level";
-retryBtn.onclick = () => {
-  document.getElementById("quiz-box").style.display = "none";
-  document.getElementById("level-select").style.display = "block";
-  document.getElementById("options").style.display = "block";
-  document.getElementById("next").style.display = "inline-block";
-};
-document.getElementById("quiz-box").appendChild(retryBtn);
+  currentQ++;
 
-      currentQ++;
-  
-      if (currentQ < questions.length) {
-        loadQuestion();
-      } else {
-        document.getElementById("progress-bar").style.width = `100%`;
-        document.getElementById("percentage").textContent = `Progress: 100%`;
-  
-        document.getElementById("question").textContent = "🎉 Quiz Completed!";
-        document.getElementById("options").style.display = "none";
-        document.getElementById("feedback").textContent = `You scored ${score} out of ${questions.length}`;
-        document.getElementById("next").style.display = "none";
-        clearInterval(timerInterval);
-      }
+  if (currentQ < questions.length) {
+    loadQuestion();
+  } else {
+    document.getElementById("progress-bar").style.width = `100%`;
+    document.getElementById("percentage").textContent = `Progress: 100%`;
+
+    document.getElementById("question").textContent = "🎉 Quiz Completed!";
+    document.getElementById("options").style.display = "none";
+    document.getElementById("feedback").textContent = `You scored ${score} out of ${questions.length}`;
+    document.getElementById("next").style.display = "none";
+    clearInterval(timerInterval);
+
+    if (!document.getElementById("retry-btn")) {
+      const retryBtn = document.createElement("button");
+      retryBtn.id = "retry-btn";
+      retryBtn.textContent = "Choose Another Level";
+      retryBtn.style.marginTop = "15px";
+      retryBtn.onclick = () => {
+        document.getElementById("quiz-box").style.display = "none";
+        document.getElementById("level-select").style.display = "block";
+        document.getElementById("options").style.display = "block";
+        document.getElementById("next").style.display = "inline-block";
+
+        retryBtn.remove();
+      };
+      document.getElementById("quiz-box").appendChild(retryBtn);
     }
+  }
+}
   
     const quizLevels = {
       beginner: [
