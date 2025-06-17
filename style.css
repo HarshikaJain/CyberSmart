@@ -237,3 +237,8 @@ nav a.dark:hover {
 body, header, section, footer {
   transition: all 0.3s ease;
 }
+
+body.dark #about-me {
+  background-color: #1a1a1a;
+  color: white;
+}
