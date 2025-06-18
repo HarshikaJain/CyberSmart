@@ -1,3 +1,4 @@
+/* Base Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -12,14 +13,46 @@ html {
   scroll-behavior: smooth;
 }
 
-/* HEADER */
+header, section, footer {
+  transition: all 0.3s ease;
+}
+
+input[type="password"],
+input[type="button"] {
+  padding: 8px;
+  width: 100%;
+  font-size: 16px;
+}
+
+input[type="button"] {
+  background-color: #2f80ed;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: transform 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+
+input[type="button"]:hover {
+  transform: scale(1.1);
+  background-color: #1c61c2;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Header */
 header {
   background-color: #2f80ed;
   color: white;
   text-align: center;
   padding: 2rem 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 header h1 {
@@ -34,18 +67,18 @@ header p {
   margin-top: 0.5rem;
 }
 
-/* NAVIGATION */
+/* Navigation */
 nav {
   margin-top: 1rem;
 }
 
 nav a {
-  margin: 0 15px;
-  font-weight: bold;
-  font-size: 30px;
   color: black;
   text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
   position: relative;
+  font-size: 30px;
   transition: color 0.3s ease;
 }
 
@@ -69,7 +102,7 @@ nav a:hover::after {
   width: 100%;
 }
 
-/* MAIN & SECTIONS */
+/* Main Layout */
 main {
   padding: 2rem;
   max-width: 900px;
@@ -81,8 +114,11 @@ section {
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+main section:first-of-type {
+  animation: fadeInUp 1s ease forwards;
 }
 
 ul {
@@ -93,17 +129,17 @@ ul li {
   margin-bottom: 0.8rem;
 }
 
-/* FOOTER */
+/* Footer */
 footer {
   text-align: center;
   padding: 1rem;
   background-color: #222;
   color: #ccc;
   font-size: 0.9rem;
-  transition: all 0.3s ease;
+  margin-top: 40px;
 }
 
-/* IMAGES */
+/* Image Effects */
 img {
   width: 140px;
   border-radius: 50%;
@@ -116,7 +152,7 @@ img:hover {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* INTRO SECTION */
+/* Animated Intro Section */
 .intro-container {
   display: flex;
   justify-content: space-between;
@@ -126,7 +162,6 @@ img:hover {
   border-radius: 20px;
   margin: 20px;
   animation: fadeInUp 1.2s ease-in-out;
-  transition: all 0.3s ease;
 }
 
 .intro-text {
@@ -145,30 +180,23 @@ img:hover {
   animation: fadeIn 2s ease;
 }
 
-/* FORMS & BUTTONS */
-input[type="password"],
-input[type="button"] {
-  padding: 8px;
-  width: 100%;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .intro-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .intro-text {
+    padding-right: 0;
+  }
+
+  .intro-image {
+    margin-top: 20px;
+  }
 }
 
-input[type="button"] {
-  background-color: #2f80ed;
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: transform 0.3s, background-color 0.3s;
-}
-
-input[type="button"]:hover {
-  transform: scale(1.1);
-  background-color: #1c61c2;
-}
-
-/* ANIMATIONS */
+/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -185,10 +213,18 @@ input[type="button"]:hover {
   }
 }
 
-main section:first-of-type {
-  animation: fadeInUp 1s ease forwards;
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Fade In for .section-div */
 .section-div {
   opacity: 0;
   transform: translateY(50px);
@@ -196,7 +232,7 @@ main section:first-of-type {
   animation-delay: 0.3s;
 }
 
-/* DARK MODE STYLES */
+/* Dark Mode Styles */
 body.dark {
   background-color: #121212;
   color: #f1f1f1;
@@ -216,17 +252,128 @@ nav a.dark {
 nav a.dark:hover {
   color: #bbdefb;
   border-bottom: 2px solid #bbdefb;
+  text-shadow: 0 0 8px #bbdefb;
 }
 
-.intro-container.dark {
-  background: linear-gradient(to right, #333, #222);
+.quiz-container.dark {
+  background-color: #1f1f1f;
+  box-shadow: 0 0 10px #333;
 }
 
-a {
-  color: #1565c0;
-  transition: color 0.3s ease;
+#options button.dark {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
 }
 
-a.dark {
-  color: #90caf9;
+.quiz-container {
+  max-width: 600px;
+  margin: auto;
+  background-color: #f3f3f3;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #aaa;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark .quiz-container {
+  background-color: #1f1f1f;
+  color: #f1f1f1;
+  box-shadow: 0 0 10px #444;
+}
+
+.question {
+  font-weight: bold;
+}
+
+.correct {
+  color: green;
+  font-weight: bold;
+}
+
+.wrong {
+  color: red;
+  font-weight: bold;
+}
+
+#quiz-box {
+  display: none;
+}
+
+#options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+#options button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+body.dark #options button {
+  background-color: #333;
+  border: 1px solid #555;
+  color: #fff;
+}
+
+body.dark #options button:hover {
+  background-color: #444;
+}
+
+#options button:hover {
+  background-color: #e0f7fa;
+  transform: scale(1.05);
+}
+
+#progress-container {
+  background: #ccc;
+  height: 10px;
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #00c853;
+  transition: width 0.5s ease-in-out;
+}
+
+#percentage {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Toggle Button (Dark Mode) */
+#modeLabel {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+body.dark #next-btn {
+  background-color: #2f80ed;
+  color: white;
+  border: none;
+}
+
+body.dark #progress-container {
+  background: #444;
+}
+
+body.dark #progress-bar {
+  background: #00e676;
 }
