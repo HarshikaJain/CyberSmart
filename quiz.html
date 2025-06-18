@@ -4,158 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cyber Quiz</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #e3f2fd;
-    }
-
-    header {
-      background: #2196f3;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    nav a {
-      margin: 0 10px;
-      color: white;
-      text-decoration: none;
-    }
-
-    .quiz-container {
-      max-width: 600px;
-      margin: auto;
-      background-color: #f3f3f3;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #aaa;
-    }
-
-    .question {
-      font-weight: bold;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .correct {
-      color: green;
-      font-weight: bold;
-    }
-
-    .wrong {
-      color: red;
-      font-weight: bold;
-    }
-
-    #quiz-box {
-      display: none;
-    }
-
-    #options {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 20px 0;
-    }
-
-    #options button {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      background-color: #ffffff;
-      border: 1px solid #ccc;
-    }
-
-    #progress-container {
-      background: #ccc;
-      height: 10px;
-      width: 100%;
-      margin: 10px 0;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    #progress-bar {
-      height: 100%;
-      width: 0%;
-      background: #00c853;
-      transition: width 0.5s ease-in-out;
-    }
-
-    #percentage {
-      font-weight: bold;
-      margin-top: 5px;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 10px;
-    }
-  </style>
+  <link rel="icon" href="Quiz.png" type="image/png">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<header>
-  <h1>🧠 Cybersecurity Quiz</h1>
-  <p>Test your cyber knowledge!</p>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="password.html">Password Checker</a>
-    <a href="phishing.html">Phishing Tips</a>
-    <a href="contact.html">About Me</a>
-  </nav>
-</header>
+  <header>
+    <h1>🔐 CyberSmart Quiz</h1>
+    <p>Test your cyber knowledge!</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="password.html">Password Checker</a>
+      <a href="phishing.html">Phishing Tips</a>
+      <a href="quiz.html">Quizzes</a>
+      <a href="contact.html">About Me</a>
+    </nav>
 
-<main class="quiz-container">
-  <div id="level-select">
-    <h2>Select Level</h2>
-    <button onclick="startQuiz('beginner')">Beginner</button>
-    <button onclick="startQuiz('intermediate')">Intermediate</button>
-    <button onclick="startQuiz('expert')">Expert</button>
-  </div>
+     <div id="mode-switch" style="text-align: right; margin: 10px 20px;">
+      <label style="cursor: pointer;">
+        <input type="checkbox" id="modeToggle" onchange="toggleMode()" style="display: none;" />
+        <span id="modeIcon" style="font-size: 24px;">🌞</span>
+      </label>
+    </div>      
+  </header>
 
-  <div id="quiz-box">
-    <div id="percentage">Progress: 0%</div>
-    <div id="progress-container">
-      <div id="progress-bar"></div>
+  <main id="quizContainer" class="quiz-container">
+    <div id="level-select">
+      <h2>Select Level</h2>
+      <button onclick="startQuiz('beginner')">Beginner</button>
+      <button onclick="startQuiz('intermediate')">Intermediate</button>
+      <button onclick="startQuiz('expert')">Expert</button>
     </div>
 
-    <h2 id="question">Question appears here</h2>
+    <div id="quiz-box">
+      <div id="percentage">Progress: 0%</div>
+      <div id="progress-container">
+        <div id="progress-bar"></div>
+      </div>
 
-    <div id="options">
-      <button id="opt0" onclick="checkAnswer(0)"></button>
-      <button id="opt1" onclick="checkAnswer(1)"></button>
-      <button id="opt2" onclick="checkAnswer(2)"></button>
-      <button id="opt3" onclick="checkAnswer(3)"></button>
+      <h2 id="question">Question appears here</h2>
+
+      <div id="options">
+        <button id="opt0" onclick="checkAnswer(0)"></button>
+        <button id="opt1" onclick="checkAnswer(1)"></button>
+        <button id="opt2" onclick="checkAnswer(2)"></button>
+        <button id="opt3" onclick="checkAnswer(3)"></button>
+      </div>
+
+      <p id="feedback"></p>
+      <p id="score">Score: 0</p>
+      <button id="next" onclick="nextQuestion()">Next</button>
     </div>
+  </main>
 
-    <p id="feedback"></p>
-    <p id="score">Score: 0</p>
-    <button id="next" onclick="nextQuestion()">Next</button>
-  </div>
-</main>
+  <footer id="mainFooter">
+    <p>Created with 🧠 by Harshika Jain</p>
+  </footer>
 
-<footer>
-  <p>Created with 🧠 by Harshika Jain</p>
-</footer>
+  <script>
+    function toggleMode() {
+      const isDark = document.getElementById("modeToggle").checked;
+  
+      document.body.classList.toggle("dark", isDark);
+      document.querySelector("header").classList.toggle("dark", isDark);
+      document.querySelectorAll("section").forEach(el => el.classList.toggle("dark", isDark));
+      document.querySelector("footer").classList.toggle("dark", isDark);
+      document.querySelectorAll("nav a").forEach(link => link.classList.toggle("dark", isDark));
+  
+     const label = document.getElementById("modeLabel");
+     label.textContent = isDark ? "🌙" : "🌞";
 
-<script>
+    }
+    
     let questions = [];
     let currentQ = 0;
     let score = 0;
-    let timerInterval;
-    let timeLeft = 15;
-  
+
     function startQuiz(level) {
       questions = quizLevels[level];
       document.getElementById("level-select").style.display = "none";
@@ -164,62 +88,58 @@
       score = 0;
       loadQuestion();
     }
-  
+
     function loadQuestion() {
       const q = questions[currentQ];
       const questionText = q.q || q.question;
-  
+
       document.getElementById("question").textContent = questionText;
-  
+
       q.options.forEach((opt, i) => {
         const btn = document.getElementById("opt" + i);
         btn.textContent = opt;
         btn.disabled = false;
         btn.className = "";
-        btn.style.backgroundColor = ""; 
+        btn.style.display = "block";
+        btn.style.backgroundColor = "";
       });
 
       for (let i = q.options.length; i < 4; i++) {
         document.getElementById("opt" + i).style.display = "none";
       }
-  
+
       document.getElementById("feedback").textContent = "";
     }
-  
+
     function checkAnswer(selected) {
-      clearInterval(timerInterval);
       const correct = questions[currentQ].answer;
       const feedback = document.getElementById("feedback");
-  
+
       const buttons = document.querySelectorAll("#options button");
       buttons.forEach((btn, index) => {
         btn.disabled = true;
         if (index === correct) {
-          btn.style.backgroundColor = "#c8e6c9"; // green for correct
+          btn.style.backgroundColor = "#c8e6c9"; 
         } else if (index === selected) {
-          btn.style.backgroundColor = "#ffcdd2"; // red for wrong
+          btn.style.backgroundColor = "#ffcdd2";
         }
       });
-  
+
       if (selected === correct) {
         feedback.textContent = "✅ Correct!";
         feedback.className = "correct";
         score++;
-      } else if (selected === null) {
-        feedback.textContent = "⏰ Time's up!";
-        feedback.className = "wrong";
       } else {
         feedback.textContent = "❌ Wrong!";
         feedback.className = "wrong";
       }
-  
+
       const progress = ((currentQ + 1) / questions.length) * 100;
       document.getElementById("progress-bar").style.width = `${progress}%`;
       document.getElementById("percentage").textContent = `Progress: ${Math.round(progress)}%`;
-  
       document.getElementById("score").textContent = `Score: ${score}/${questions.length}`;
     }
-  
+
     function nextQuestion() {
   currentQ++;
 
@@ -227,81 +147,88 @@
     loadQuestion();
   } else {
     document.getElementById("progress-bar").style.width = `100%`;
-    document.getElementById("percentage").textContent = `Progress: 100%`;
-
+    document.getElementById("percentage").textContent = `Questions Completed: 100%`;
     document.getElementById("question").textContent = "🎉 Quiz Completed!";
+    document.getElementById("feedback").style.display = "none";
     document.getElementById("options").style.display = "none";
-    document.getElementById("feedback").textContent = `You scored ${score} out of ${questions.length}`;
     document.getElementById("next").style.display = "none";
+    document.getElementById("score").textContent = `Score: ${score}/${questions.length}`;
     clearInterval(timerInterval);
 
-    if (!document.getElementById("retry-btn")) {
-      const retryBtn = document.createElement("button");
-      retryBtn.id = "retry-btn";
-      retryBtn.textContent = "Choose Another Level";
-      retryBtn.style.marginTop = "15px";
-      retryBtn.onclick = () => {
-        document.getElementById("quiz-box").style.display = "none";
-        document.getElementById("level-select").style.display = "block";
-        document.getElementById("options").style.display = "block";
-        document.getElementById("next").style.display = "inline-block";
+    const total = questions.length;
+    const stars = Math.round((score / total) * 5);
+    const starDisplay = "⭐".repeat(stars) + "☆".repeat(5 - stars);
 
-        retryBtn.remove();
-      };
-      document.getElementById("quiz-box").appendChild(retryBtn);
-    }
+    document.getElementById("feedback").innerHTML = `
+      You scored ${score} out of ${total}<br/>
+      ${starDisplay}
+    `;
+
+    const existingRetry = document.getElementById("retry-btn");
+    if (existingRetry) existingRetry.remove();
+
+    const retryBtn = document.createElement("button");
+    retryBtn.id = "retry-btn";
+    retryBtn.textContent = "Choose Another Level";
+    retryBtn.style.marginTop = "15px";
+    retryBtn.onclick = () => {
+      document.getElementById("quiz-box").style.display = "none";
+      document.getElementById("level-select").style.display = "block";
+
+      document.getElementById("options").style.display = "block";
+      document.getElementById("next").style.display = "inline-block";
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("score").textContent = "Score: 0";
+      document.getElementById("progress-bar").style.width = "0%";
+      document.getElementById("percentage").textContent = "Progress: 0%";
+      document.getElementById("question").textContent = "";
+
+      retryBtn.remove();
+    };
+
+    document.getElementById("quiz-box").appendChild(retryBtn);
   }
 }
-  
+
+
     const quizLevels = {
       beginner: [
-        {
-          question: "What should you never share online?",
-          options: ["Your favorite color", "Your password", "A meme"],
-          answer: 1
-        },
-        {
-          question: "What does phishing mean?",
-          options: ["Catching fish", "Cyber attack", "Online game", "Web surfing"],
-          answer: 1
-        },
-        {
-          question: "A secure website starts with:",
-          options: ["http://", "www", "https://"],
-          answer: 2
-        }
+        { question: "What should you never share online?", options: ["Your favorite color", "Your password", "A meme"], answer: 1 },
+        { question: "What does phishing mean?", options: ["Catching fish", "Cyber attack", "Online game", "Web surfing"], answer: 1 },
+        { question: "A secure website starts with:", options: ["http://", "www", "https://"], answer: 2 },
+        { question: "Which password is strongest?", options: ["Pass123", "P@ssW0rd", "5#rT!p@9sL"], answer: 2 },
+        { question: "Which of these is an example of personal information?", options: ["Your favorite actor", "Your home address", "Cartoon name"], answer: 1 },
+        { question: "What does HTTPS stand for?", options: ["HyperText Transfer Protocol Secure", "High Text Transfer Protocol Standard", "Hyper Transfer Terminal Protocol", "Hack Test Secure Protocol"], answer: 0 },
+        { question: "What should you do if you get a suspicious link?", options: ["Click it fast", "Ignore it", "Report it"], answer: 2 },
+        { question: "What is spam?", options: ["Tasty food", "Unwanted email", "Game download"], answer: 1 },
+        { question: "What is 2FA?", options: ["Two Finger Authentication", "Two-Factor Authentication", "Fast Login App"], answer: 1 },
+        { question: "How often should you update passwords?", options: ["Every 5 years", "Never", "Regularly"], answer: 2 }
       ],
       intermediate: [
-        {
-          question: "Which is a sign of a phishing email?",
-          options: ["Urgent action needed", "Greeting by your name", "No links included"],
-          answer: 0
-        },
-        {
-          question: "What is 2FA?",
-          options: ["Two Finger Authentication", "Two-Factor Authentication", "Fast Login App"],
-          answer: 1
-        },
-        {
-          question: "Which is a sign of phishing?",
-          options: ["Secure website", "Misspelled email", "HTTPS site", "Strong password"],
-          answer: 1
-        }
+        { question: "Which is a sign of a phishing email?", options: ["Urgent action needed", "Greeting by your name", "No links included"], answer: 0 },
+        { question: "Which is a sign of phishing?", options: ["Secure website", "Misspelled email", "HTTPS site", "Strong password"], answer: 1 },
+        { question: "Why is logging out important?", options: ["It refreshes the page", "It protects your account", "It looks cool"], answer: 1 },
+        { question: "Which of the following protects your device?", options: ["Firewall", "Loudspeaker", "Keyboard"], answer: 0 },
+        { question: "A fake website may have:", options: ["Unusual domain name", "No logo", "Odd layout", "All of these"], answer: 3 },
+        { question: "Why should you use a VPN?", options: ["Faster video", "Hide location", "More storage"], answer: 1 },
+        { question: "What does encryption do?", options: ["Speed up browsing", "Protect data by scrambling", "Delete files"], answer: 1 },
+        { question: "Public Wi-Fi is risky because:", options: ["It’s slow", "Data can be intercepted", "No signal"], answer: 1 },
+        { question: "Which protocol is secure?", options: ["FTP", "HTTP", "HTTPS"], answer: 2 },
+        { question: "What does encryption do?", options: ["Speed up browsing", "Protect data by scrambling", "Delete files"], answer: 1 }
       ],
       expert: [
-        {
-          question: "Which password is strongest?",
-          options: ["Pass123", "P@ssW0rd", "5#rT!p@9sL"],
-          answer: 2
-        },
-        {
-          question: "How often should you update passwords?",
-          options: ["Every 5 years", "Never", "Regularly"],
-          answer: 2
-        }
+        { question: "Which device is safest to use on public Wi-Fi?", options: ["Any phone", "VPN-enabled device", "Unlocked laptop"], answer: 1 },
+        { question: "Which is a good 2FA method?", options: ["OTP on phone", "Hint-based password", "Friend's login"], answer: 0 },
+        { question: "Which file extension is usually safe to open?", options: [".exe", ".pdf", ".bat", ".cmd"], answer: 1 },
+        { question: "What is a brute force attack?", options: ["Guessing passwords repeatedly", "Fast file download", "Typing with force"], answer: 0 },
+        { question: "What is a zero-day vulnerability?", options: ["Day without hacks", "Unknown software flaw", "Backup day"], answer: 1 },
+        { question: "What’s a digital certificate?", options: ["A gift card", "Browser tool", "Website authentication proof"], answer: 2 },
+        { question: "Which is safest for password storage?", options: ["Sticky note", "Encrypted password manager", "Notepad app"], answer: 1 },
+        { question: "How does social engineering work?", options: ["Hack computers", "Trick people", "Change software"], answer: 1 },
+        { question: "What is a keylogger?", options: ["Keyboard brand", "Tool to log keystrokes", "Typing tutor"], answer: 1 },
+        { question: "What is multi-factor authentication?", options: ["One password", "Password + OTP or biometrics", "PIN only"], answer: 1 }
       ]
     };
-  </script>  
-
+  </script>
 </body>
 </html>
