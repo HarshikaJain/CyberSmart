@@ -52,17 +52,15 @@
         
 <script>
   function toggleMode() {
-    const isDark = document.getElementById("modeToggle").checked;
+      const isDark = document.getElementById("modeToggle").checked;
+      document.body.classList.toggle("dark", isDark);
+      document.querySelector("header").classList.toggle("dark", isDark);
+      document.querySelectorAll("section").forEach(el => el.classList.toggle("dark", isDark));
+      document.querySelector("footer").classList.toggle("dark", isDark);
+      document.querySelectorAll("nav a").forEach(link => link.classList.toggle("dark", isDark));
 
-    document.body.classList.toggle("dark", isDark);
-    document.querySelector("header").classList.toggle("dark", isDark);
-    document.querySelectorAll("section").forEach(el => el.classList.toggle("dark", isDark));
-    document.querySelector("footer").classList.toggle("dark", isDark);
-    document.querySelectorAll("nav a").forEach(link => link.classList.toggle("dark", isDark));
-
-    const label = document.getElementById("modeLabel");
-    label.textContent = isDark ? "🌙" : "🌞";
-  }
+      document.getElementById("modeIcon").textContent = isDark ? "🌙" : "🌞";
+    }
 </script>
 
 </body>
