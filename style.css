@@ -99,7 +99,6 @@ nav a:hover::after {
   width: 100%;
 }
 
-/* Main Layout */
 main {
   padding: 2rem;
   max-width: 900px;
@@ -189,7 +188,6 @@ img:hover {
   }
 }
 
-/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -345,13 +343,13 @@ body.dark #options button:hover {
   margin-top: 5px;
 }
 
-#modeLabel {
-  position: fixed;
-  top: 15px;
-  right: 20px;
+#mode-switch {
+  margin: 10px 20px;
+}
+
+#mode-switch span {
   font-size: 24px;
   cursor: pointer;
-  z-index: 1000;
 }
 
 body.dark #next-btn {
